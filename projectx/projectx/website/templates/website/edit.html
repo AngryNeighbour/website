@@ -1,0 +1,26 @@
+{% extends 'website/layout.html' %}
+
+{%block title%}
+Стихи
+{%endblock%}
+
+{%block body%}
+<h1> Редактирование стихов </h1>
+
+<form action="{% url "save_edit" %}" method="POST">
+    {% csrf_token %}
+    <!-- <label>Название стихотворения: </label> -->
+    <input type="hidden" name="old_title" value="{{title}}">
+    <input type="text" name="title" placeholder="Введите название" value="{{ title }}">
+    <br>
+    <label>Текст стихотворения:</label>
+    <br>
+    <textarea name="entry_text" placeholder="Введите текст стихотворения" >{{ content }}</textarea>
+    <br>
+    <input type="submit" value="Редактировать" class="btn btn-primary">
+</form>
+
+
+
+
+{%endblock%}

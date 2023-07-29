@@ -1,0 +1,24 @@
+{% extends 'website/layout.html' %}
+
+{%block title%}
+Стихи
+{%endblock%}
+
+{%block body%}
+
+<form action="{% url 'new_poem' %}" method="POST">
+    {% csrf_token %}
+    <label>Название: </label>
+    <input type="text" name="title" placeholder="Название стихотворения">
+    <br>
+    <label>Текст стихотворения:</label>
+    <br>
+    <textarea name="poem_text" rows="5" cols="20" placeholder="Введите текст стиховторения"></textarea>
+    <br>
+    <input type="submit" value="Создать" class="btn btn-primary">
+</form>
+<br>
+<a class="btn btn-primary" href="{% url 'index' %}" role="button">Вернуться на главную</a>
+
+
+{%endblock%}

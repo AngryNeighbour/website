@@ -1,0 +1,31 @@
+{% extends 'website/layout.html' %}
+
+{%block title%}
+Стихи
+{%endblock%}
+
+{%block body%}
+<div class="poem_page_block">
+    <div class="poem_page_title">{{title}}</div>
+    <br>
+    {{ content| safe }}
+</div>
+<hr>
+{% if user.is_staff %}
+<form action="{% url 'edit' %}" method="POST" >
+    {% csrf_token %}
+    <input type="hidden" name="poem_title" value="{{title}}">
+    <input type="submit" value="Редактировать" class="btn btn-primary">
+
+</form>
+{% endif %}
+<br>
+<a class="btn btn-primary" href="{% url 'index' %}" role="button">Вернуться на главную</a>
+<br>
+<br>
+{% if user.is_staff %}
+<a class="btn btn-danger" href="{% url 'delete_poem' title=title %}" role="button">Удалить стихотворение</a>
+{% endif %}
+
+
+{%endblock%}

@@ -1,0 +1,25 @@
+{% extends 'website/layout.html' %}
+
+{%block title%}
+Стихи
+{%endblock%}
+
+{%block body%}
+
+<!-- <ul class="listik"> </ul> -->
+<div class="submain">
+{% for poem in poems_data %}
+
+<li class="listik">
+    <a class="poem_list_header"href="{% url 'poem' title=poem.title %}"> {{ poem.poem_title|safe }}</a>  <div class="poem_list_content">{{ poem.html_content|safe }} </div> 
+    <div class="poem_list_footer"> 
+        <a class="btn btn-primary" href="{% url 'poem' title=poem.title %}" role="button">Прочитать полностью</a>
+    </div>
+</li>
+
+
+{% endfor %}
+</div>
+
+
+{%endblock%}

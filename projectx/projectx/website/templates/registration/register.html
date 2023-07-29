@@ -1,0 +1,15 @@
+{% extends 'website/layout.html' %}
+
+{% block title %}
+Registration
+{% endblock %}
+
+{% block body %}
+
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+{{form}}
+<button type="submit", class="btn btn-success"> Регистрация</button>
+</form>
+
+{% endblock %}
