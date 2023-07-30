@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
 from django.views import View
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import PasswordResetView, PasswordResetCompleteView, PasswordResetConfirmView, PasswordResetDoneView
+from django.contrib.auth.decorators import login_required
 
 from . import utils
 import os
@@ -11,6 +11,7 @@ import markdown
 import codecs
 import requests
 from . import forms
+from . import models
 
 #import codecs и 'utf-8' для отображения русских букв
 #poems_dir = os.path.join(os.path.dirname(__file__), 'poems')
@@ -171,18 +172,38 @@ class PasswordResetCompleteView_1(PasswordResetCompleteView):
 class PasswordResetDoneView_1(PasswordResetDoneView):
     template_name = 'registration/password_reset_mail_sent.html'
 
-
-class ProfileEdit(View):
-    pass
-
-
-class ProfilePage(View):
+class ViewProfile(View):
     template_name = "website/profile.html"
+
     def get(self, request):
+        user_profile = models.UserProfile.objects.get(user=request.user)
         context = {
-            "name": 34,
+            "user_profile":user_profile
         }
         return render(request, self.template_name, context)
+
+
+class EditProfile(View):
+    def get(self, request):
+        user_profile = models.UserProfile.objects.get(user=request.user)
+        form = forms.UserProfileForm(instance=user_profile)
+        template_name = 'website/profile_edit.html'
+        context = {
+            "form": form
+        }
+        return render(request, template_name, context)
+    
+    def post(self, request):
+        user_profile = models.UserProfile.objects.get(user=request.user)
+        form = forms.UserProfileForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('view_profile')
+        
+    
+
+
+
 
 
 

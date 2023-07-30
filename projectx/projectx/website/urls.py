@@ -17,8 +17,10 @@ urlpatterns = [
     path("new_poem/", views.new_poem, name="new_poem"),
     path("delete_poem/<str:title>", views.delete_poem, name="delete_poem"),
 
-    path("profile/", views.ProfilePage.as_view(), name="profile_page"),
-    path("profile_edit/", views.ProfileEdit.as_view(), name="profile_edit"),
+    #path("profile/", views.view_profile, name="view_profile"),
+    path("profile/", views.ViewProfile.as_view(), name="view_profile"),
+    path("profile/edit/", views.EditProfile.as_view(), name="edit_profile"),
+    #path("profile/edit/", views.edit_profile, name="edit_profile"),
 
 
 

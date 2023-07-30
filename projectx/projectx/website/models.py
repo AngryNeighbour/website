@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
+
 
 # Create your models here.
 
@@ -15,9 +16,11 @@ class CustomUser(AbstractUser):
     pass
 
 class UserProfile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, default=None)
     GENDER_CHOICES = [
-        ("male", "Мужской"),
-        ("female", "Женский")
+        ("Мужской", "Мужской"),
+        ("Женский", "Женский"),
+        ("Кот", "Кот")
     ]
     name = models.CharField(max_length=100)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)

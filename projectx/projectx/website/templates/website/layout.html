@@ -24,7 +24,7 @@
     <div>
         <ul>
             <li> {% if user.is_authenticated %}
-                {{ user }}
+                <a href="{% url 'view_profile' %}">{{ user }}</a>
                  {%else %}
                  Гость
                  {%endif%}
@@ -36,6 +36,7 @@
             <li>
                 <a href="{% url 'new_poem' %}">Новая запись</a>
             </li>
+            
             {% endif %}
         </ul>
         {% if user.is_authenticated %}

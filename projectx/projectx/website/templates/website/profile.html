@@ -7,14 +7,14 @@
 
 {%block body%}
 
-Имя: {{name}}
+Имя: {{ user_profile.name }}
 <br>
-Дата рождения: 
+Дата рождения: {{ user_profile.birthday }}
 <br>
-Пол:
+Пол: {{ user_profile.gender }}
 <br>
 
 
-
+<a class="btn btn-primary" href="{% url 'edit_profile' %}" role="button">Редактировать профиль</a>
 
 {%endblock%}

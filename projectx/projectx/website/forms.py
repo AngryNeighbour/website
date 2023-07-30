@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfile
+from .models import UserProfile, CustomUser
 #from .models import Poem
 from django.contrib.auth.forms import UserCreationForm
 #from django.contrib.auth.forms import BaseUserCreationForm
@@ -22,7 +22,7 @@ class UserCreationForm1(UserCreationForm):
         fields = ("email","username")
 
 
-class ProfileForm(forms.ModelForm):
+class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['name', 'gender', 'birthday']
