@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
+from . import models
+
 
 User = get_user_model()
 
@@ -26,6 +28,12 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['name', 'gender', 'birthday']
+
+
+class UserCommentForm(forms.ModelForm):
+    class Meta:
+        model = models.CommentSection
+        fields = ['comment', 'verse_title']
 
 
 
